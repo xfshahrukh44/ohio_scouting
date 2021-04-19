@@ -18,10 +18,12 @@
   <!-- toastr js -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> -->
 
-
+  <!-- local css -->
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <!-- <link rel="stylesheet" href="{{asset('css/custom-style.css')}}"> -->
   <!-- <link rel="stylesheet" href="{{asset('dist/css/adminlte.css')}}"> -->
+
+  <!-- adminlte css -->
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
   <!-- <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.dataTables.min.css')}}"> -->
 
@@ -88,7 +90,7 @@
 
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt "></i>
                         <p>
                             Dashboard
@@ -167,9 +169,12 @@
   </footer>
 </div>
 
+<!-- local js -->
 <script src="{{asset('js/app.js')}}"></script>
 <!-- <script src="{{asset('js/jquery.dataTables.min.js')}}" defer></script> -->
 <!-- <script src="{{asset('dist/js/adminlte.js')}}"></script> -->
+
+<!-- adminlte js -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('dist/js/demo.js')}}"></script>
 
@@ -177,7 +182,7 @@
 <!-- <script type="text/javascript" src="{{asset('fancybox/source/jquery.fancybox.pack.js?v=2.1.7')}}"></script> -->
 
 <!-- jquery ui js-->
-<!-- <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script> -->
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
 <!-- pusher work -->
 
