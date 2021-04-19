@@ -123,23 +123,13 @@
                 </li>
 
                 <!-- user management -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user "></i>
-                        <p>
-                            User Management
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                <li class="nav-item">
+                    <a href="{{route('user.index')}}" class="nav-link">
+                      <i class="nav-icon fas fa-user "></i>
+                      <p>
+                        User Management
+                      </p>
                     </a>
-                    <ul class="nav nav-treeview ml-2">
-                        <!-- Staff -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <small>Staff</small>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>
