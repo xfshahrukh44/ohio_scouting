@@ -19,4 +19,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// ADMIN PANEL ROUTES---------------------------------------
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
+    // DASHBOARD
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+
+    // BLADE INDEXES----------------------------------------------------------------
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    // ----------------------------------------------------------------------------
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
