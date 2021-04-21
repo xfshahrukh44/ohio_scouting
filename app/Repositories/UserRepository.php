@@ -138,7 +138,27 @@ abstract class UserRepository implements RepositoryInterface
     public function paginate($pagination)
     {
         try {
-            return $this->model->paginate($pagination);
+            return $this->model->orderBy('type', 'ASC')->paginate($pagination);
+        }
+        catch (\Exception $exception) {
+            throw new AllUserException($exception->getMessage());
+        }
+    }
+
+    public function paginate_realtors($pagination)
+    {
+        try {
+            return $this->model->where('type', 'Realtor')->paginate($pagination);
+        }
+        catch (\Exception $exception) {
+            throw new AllUserException($exception->getMessage());
+        }
+    }
+
+    public function paginate_cleaners($pagination)
+    {
+        try {
+            return $this->model->where('type', 'Cleaner')->paginate($pagination);
         }
         catch (\Exception $exception) {
             throw new AllUserException($exception->getMessage());

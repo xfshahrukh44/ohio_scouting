@@ -23,7 +23,18 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userService->paginate(env('PAGINATE'));
-        $user_type = 'staff';
+        return view('admin.user.user', compact('users'));
+    }
+
+    public function index_realtors()
+    {
+        $users = $this->userService->paginate_realtors(env('PAGINATE'));
+        return view('admin.user.user', compact('users'));
+    }
+
+    public function index_cleaners()
+    {
+        $users = $this->userService->paginate_cleaners(env('PAGINATE'));
         return view('admin.user.user', compact('users'));
     }
     

@@ -103,7 +103,7 @@
                 </li>
 
                 <!-- Blog Management -->
-                <li class="nav-item has-treeview">
+                <!-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -111,16 +111,16 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview ml-2">
+                    <ul class="nav nav-treeview ml-2"> -->
                         <!-- Articles -->
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <small>Articles</small>
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <!-- user management -->
                 <li class="nav-item">

@@ -1,12 +1,12 @@
 <?php
 
 use Carbon\Carbon;
-use App\User;
 use App\Models\Marketing;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Invoice;
+use App\Models\User;
 
 function return_date($date)
 {
@@ -36,4 +36,15 @@ function return_user_name($id)
 function return_decimal_number($foo)
 {
     return number_format((float)$foo, 2, '.', '');
+}
+
+function count_by_type($type){
+    if($type == "All"){
+        $count = count(User::all());
+    }
+    else{
+        $count = count(User::where('type', $type)->get());
+    }
+    
+    return $count;
 }
