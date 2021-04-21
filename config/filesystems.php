@@ -51,6 +51,12 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        
+        // logos
+        'public_logos' => [
+            'driver' => 'local',
+            'root' => public_path('img/logos'),
+        ],
 
     ],
 

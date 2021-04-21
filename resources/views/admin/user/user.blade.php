@@ -254,9 +254,11 @@
         //     "bInfo": false,
         //     "searching":false
         // });
+
         // persistent active sidebar
         var element = $('li a[href*="'+ window.location.pathname +'"]');
-        element.parent().parent().parent().addClass('menu-open');
+        element.parent().addClass('menu-open');
+
         //*** View Profile ***//
         $('.viewProfileButton').on('click', function(){
             var id = $(this).data('id');

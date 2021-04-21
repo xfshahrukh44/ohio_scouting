@@ -34,26 +34,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
     // API RESOURCES-------------------------------------------------
     Route::apiResources(['user'=>'Admin\UserController']);
-    // Route::apiResources(['customer'=>'Admin\CustomerController']);
-    // Route::apiResources(['area'=>'Admin\AreaController']);
-    // Route::apiResources(['market'=>'Admin\MarketController']);
-    // Route::apiResources(['category'=>'Admin\CategoryController']);
-    // Route::apiResources(['brand'=>'Admin\BrandController']);
-    // Route::apiResources(['unit'=>'Admin\UnitController']);
-    // Route::apiResources(['product'=>'Admin\ProductController']);
-    // Route::apiResources(['special_discount'=>'Admin\SpecialDiscountController']);
-    // Route::apiResources(['ledger'=>'Admin\LedgerController']);
-    // Route::apiResources(['stock_in'=>'Admin\StockInController']);
-    // Route::apiResources(['stock_out'=>'Admin\StockOutController']);
-    // Route::apiResources(['order'=>'Admin\OrderController']);
-    // Route::apiResources(['invoice'=>'Admin\InvoiceController']);
-    // Route::apiResources(['vendor'=>'Admin\VendorController']);
-    // Route::apiResources(['receiving'=>'Admin\ReceivingController']);
-    // Route::apiResources(['payment'=>'Admin\PaymentController']);
-    // Route::apiResources(['expense'=>'Admin\ExpenseController']);
-    // Route::apiResources(['marketing'=>'Admin\MarketingController']);
-    // Route::apiResources(['customer_image'=>'Admin\CustomerImageController']);
-    // Route::apiResources(['product_image'=>'Admin\ProductImageController']);
+    Route::apiResources(['logo'=>'Admin\LogoController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------

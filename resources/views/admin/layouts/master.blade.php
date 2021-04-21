@@ -82,7 +82,7 @@
     <a href="{{route('dashboard')}}" class="brand-link" id="topSidebar">
       <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="LaraStart Logo" class="brand-image img-circle elevation-3"
       style="opacity: .8">
-      <span class="brand-text font-weight-light">Management System</span>
+      <span class="brand-text font-weight-light">{{env('APP_NAME')}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -102,25 +102,24 @@
                     </a>
                 </li>
 
-                <!-- Blog Management -->
-                <!-- <li class="nav-item has-treeview">
+                <!-- Layout -->
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-tv"></i>
                         <p>
-                            Blog Management
+                            Layout
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview ml-2"> -->
-                        <!-- Articles -->
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <small>Articles</small>
+                    <ul class="nav nav-treeview">
+                        <!-- Logo Management -->
+                        <li class="nav-item">
+                            <a href="{{route('logo.index')}}" class="nav-link">
+                                <small>Logo Management</small>
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
 
                 <!-- user management -->
                 <li class="nav-item">
