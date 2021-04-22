@@ -54,6 +54,15 @@ class TestimonialController extends Controller
             $req['image'] = $imageName;
         }
 
+        // status work
+        if(isset($request['status'])){
+            $req['status'] = 'Active';
+        }
+        else{
+            $req['status'] = 'Inactive';
+        }
+
+
         // create testimonial
         $testimonial = ($this->testimonialService->create($req))['testimonial']['testimonial'];
 
@@ -95,6 +104,14 @@ class TestimonialController extends Controller
             $imageName = Str::random(10).'.png';
             Storage::disk('public_testimonials')->put($imageName, \File::get($image));
             $req['image'] = $imageName;
+        }
+
+        // status work
+        if(isset($request['status'])){
+            $req['status'] = 'Active';
+        }
+        else{
+            $req['status'] = 'Inactive';
         }
 
         $testimonial = ($this->testimonialService->update($req, $id))['testimonial']['testimonial'];

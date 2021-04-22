@@ -122,4 +122,18 @@ abstract class TestimonialRepository implements RepositoryInterface
             throw new AllTestimonialException($exception->getMessage());
         }
     }
+
+    public function search_testimonials($query)
+    {
+        // foreign fields
+
+        // search block
+        $testimonials = $this->model::where('name', 'LIKE', '%'.$query.'%')
+                        ->orWhere('designation', 'LIKE', '%'.$query.'%')
+                        ->orWhere('status', 'LIKE', '%'.$query.'%')
+                        ->orWhere('description', 'LIKE', '%'.$query.'%')
+                        ->paginate(env('PAGINATION'));
+
+        return $testimonials;
+    }
 }
