@@ -118,6 +118,12 @@
                                 <small>Logo Management</small>
                             </a>
                         </li>
+                        <!-- CMS Content -->
+                        <li class="nav-item">
+                            <a href="{{route('cms_page.index')}}" class="nav-link ml-2">
+                                <small>CMS Content</small>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

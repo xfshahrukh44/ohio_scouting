@@ -64,6 +64,12 @@ return [
             'root' => public_path('img/testimonials'),
         ],
 
+        // cms_pages
+        'public_cms_pages' => [
+            'driver' => 'local',
+            'root' => public_path('img/cms_pages'),
+        ],
+
     ],
 
     /*

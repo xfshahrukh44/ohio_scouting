@@ -3,7 +3,7 @@
 @section('content_header')
 <div class="row mb-2">
   <div class="col-sm-6">
-    <h1 class="m-0 text-dark"><i class="nav-icon fas fa-bullhorn"></i> Testimonials</h1>
+    <h1 class="m-0 text-dark">CMS Content</h1>
   </div>
 </div>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
@@ -109,12 +109,12 @@
     <div class="card">
       <div class="card-header">
         <div class="card-tools">
-            <button class="btn btn-success" id="add_item" data-toggle="modal" data-target="#addTestimonialModal">
+            <button class="btn btn-success" id="add_item" data-toggle="modal" data-target="#addCmsPageModal">
                 <i class="fas fa-plus"></i>
             </button>
         </div>
         <!-- search bar -->
-        <form action="{{route('search_testimonials')}}" class="form-wrapper">
+        <form action="{{route('search_cms_pages')}}" class="form-wrapper">
           <div class="row">
               <!-- search bar -->
               <div class="topnav col-md-4 col-sm-4">
@@ -136,33 +136,44 @@
               <tr role="row">
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Image</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Name</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Designation</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Description</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Title</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Content</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Content 2</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Status</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Actions</th>
               </tr>
             </thead>
             <tbody>
-              @if(count($testimonials) > 0)
-                @foreach($testimonials as $testimonial)
+              @if(count($cms_pages) > 0)
+                @foreach($cms_pages as $cms_page)
                   <tr role="row" class="odd">
                     <!-- image (fancybox) -->
-                    <td class="{{'image'.$testimonial->id}}" width="140">
-                        <a class="fancybox" href="{{($testimonial->image) ? (asset('img/testimonials') . '/' . $testimonial->image) : (asset('img/noimg.jpg'))}}">
-                            <img src="{{($testimonial->image) ? (asset('img/testimonials') . '/' . $testimonial->image) : (asset('img/noimg.jpg'))}}" width="60%" alt="">
+                    <td class="{{'image'.$cms_page->id}}" width="140">
+                        <a class="fancybox" href="{{($cms_page->image) ? (asset('img/cms_pages') . '/' . $cms_page->image) : (asset('img/noimg.jpg'))}}">
+                            <img src="{{($cms_page->image) ? (asset('img/cms_pages') . '/' . $cms_page->image) : (asset('img/noimg.jpg'))}}" width="60%" alt="">
                         </a>
                     </td>
 
                     <!-- name -->
-                    <td class="{{'name'.$testimonial->id}}">{{$testimonial->name}}</td>
+                    <td class="{{'name'.$cms_page->id}}">{{$cms_page->name}}</td>
 
-                    <!-- designation -->
-                    <td class="{{'designation'.$testimonial->id}}">{{$testimonial->designation}}</td>
+                    <!-- title -->
+                    <td class="{{'title'.$cms_page->id}}">{{$cms_page->title}}</td>
 
-                    <!-- description (with see more collapse) -->
-                    <td class="{{'description'.$testimonial->id}}">
+                    <!-- content (with see more collapse) -->
+                    <td class="{{'content'.$cms_page->id}}">
                       <div class="content hideContent">
-                        {{$testimonial->description}}
+                        {{$cms_page->content}}
+                      </div>
+                      <div class="show-more">
+                        <a href="#">Show more</a>
+                      </div></td>
+                    </td>
+
+                    <!-- content_2 (with see more collapse) -->
+                    <td class="{{'content_2'.$cms_page->id}}">
+                      <div class="content hideContent">
+                        {{$cms_page->content_2}}
                       </div>
                       <div class="show-more">
                         <a href="#">Show more</a>
@@ -170,27 +181,27 @@
                     </td>
 
                     <!-- status -->
-                    <td class="{{'status'.$testimonial->id}}">{{$testimonial->status}}</td>
+                    <td class="{{'status'.$cms_page->id}}">{{$cms_page->status}}</td>
 
                     <!-- actions -->
                     <td width="100">
                         <!-- Detail -->
-                        <!-- <a href="#" class="detailButton" data-id="{{$testimonial->id}}">
+                        <!-- <a href="#" class="detailButton" data-id="{{$cms_page->id}}">
                           <i class="fas fa-eye green ml-1"></i>
                         </a> -->
                         <!-- Edit -->
-                        <a href="#" class="editButton" data-id="{{$testimonial->id}}">
+                        <a href="#" class="editButton" data-id="{{$cms_page->id}}">
                           <i class="fas fa-edit blue ml-1"></i>
                         </a>
                         <!-- Delete -->
-                        <a href="#" class="deleteButton" data-id="{{$testimonial->id}}">
+                        <a href="#" class="deleteButton" data-id="{{$cms_page->id}}">
                           <i class="fas fa-trash red ml-1"></i>
                         </a>
                     </td>
                   </tr>
                 @endforeach
               @else
-                <tr><td colspan="6"><h6 align="center">No testimonial(s) found</h6></td></tr>
+                <tr><td colspan="7"><h6 align="center">No cms_page(s) found</h6></td></tr>
               @endif
             </tbody>
             <tfoot>
@@ -200,8 +211,8 @@
         </div>
       <!-- /.card-body -->
       <div class="card-footer">
-        @if(count($testimonials) > 0)
-        {{$testimonials->appends(request()->except('page'))->links()}}
+        @if(count($cms_pages) > 0)
+        {{$cms_pages->appends(request()->except('page'))->links()}}
         @endif
       </div>
     </div>
@@ -209,18 +220,18 @@
 </div>
 
  <!-- Create view -->
-<div class="modal fade" id="addTestimonialModal" tabindex="-1" role="dialog" aria-labelledby="addTestimonialModalLabel" aria-hidden="true">
+<div class="modal fade" id="addCmsPageModal" tabindex="-1" role="dialog" aria-labelledby="addCmsPageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addTestimonialModalLabel">Add New Testimonial</h5>
+        <h5 class="modal-title" id="addCmsPageModalLabel">Add New CMS Page</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{route('testimonial.store')}}" enctype="multipart/form-data">
+      <form method="POST" action="{{route('cms_page.store')}}" enctype="multipart/form-data">
         @csrf
-        @include('admin.testimonial.testimonial_master')
+        @include('admin.cms_page.cms_page_master')
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Create</button>
         </div>
@@ -230,21 +241,21 @@
 </div>
 
 <!-- Edit view -->
-<div class="modal fade" id="editTestimonialModal" tabindex="-1" role="dialog" aria-labelledby="editTestimonialModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCmsPageModal" tabindex="-1" role="dialog" aria-labelledby="editCmsPageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editTestimonialModalLabel">Edit Testimonial</h5>
+        <h5 class="modal-title" id="editCmsPageModalLabel">Edit CMS Page</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="editForm" method="POST" action="{{route('testimonial.update', 1)}}" enctype="multipart/form-data">
+      <form id="editForm" method="POST" action="{{route('cms_page.update', 1)}}" enctype="multipart/form-data">
         <!-- hidden input -->
         @method('PUT')
         <input id="hidden" type="hidden" name="hidden">
         @csrf
-        @include('admin.testimonial.testimonial_master')
+        @include('admin.cms_page.cms_page_master')
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
@@ -254,11 +265,11 @@
 </div>
 
 <!-- Detail view -->
-<div class="modal fade" id="viewTestimonialModal" tabindex="-1" role="dialog" aria-labelledby="addTestimonialModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewCmsPageModal" tabindex="-1" role="dialog" aria-labelledby="addCmsPageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Testimonial Detail</h5>
+                <h5 class="modal-title">CmsPage Detail</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -268,7 +279,7 @@
             <!-- TABS -->
             <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active bci" data-toggle="tab" href="#bci">Basic Testimonial Information</a>
+                <a class="nav-link active bci" data-toggle="tab" href="#bci">Basic CmsPage Information</a>
               </li>
               <li class="nav-item" role="presentation" >
                 <a class="nav-link" data-toggle="tab" href="#si">Shop Information</a>
@@ -283,7 +294,7 @@
 
             <!-- TAB CONTENT -->
             <div class="tab-content" id="myTabContent">
-              <!-- basic testimonial info -->
+              <!-- basic cms_page info -->
               <div class="tab-pane fade show active" id="bci">
                 <div class="card-body">
                   <div class="col-md-12 col-sm-12">
@@ -304,7 +315,7 @@
                                 <td class="whatsapp_number"></td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td class="">Testimonial Type</td>
+                                <td class="">CmsPage Type</td>
                                 <td class="type"></td>
                             </tr>
                         </tbody>
@@ -414,16 +425,16 @@
 </div>
 
 <!-- Delete view -->
-<div class="modal fade" id="deleteTestimonialModal" tabindex="-1" role="dialog" aria-labelledby="deleteTestimonialModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteCmsPageModal" tabindex="-1" role="dialog" aria-labelledby="deleteCmsPageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteTestimonialModalLabel">Delete Testimonial</h5>
+        <h5 class="modal-title" id="deleteCmsPageModalLabel">Delete CMS Page</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="deleteForm" method="POST" action="{{route('testimonial.destroy', 1)}}">
+      <form id="deleteForm" method="POST" action="{{route('cms_page.destroy', 1)}}">
         <!-- hidden input -->
         @method('DELETE')
         @csrf
@@ -462,7 +473,8 @@ $(document).ready(function(){
   
     // persistent active sidebar
     var element = $('li a[href*="'+ window.location.pathname +'"]');
-    element.parent().addClass('menu-open');
+    element.parent().parent().parent().addClass('menu-open');
+    element.addClass('active');
 
     // fancybox init
     $(".fancybox").fancybox({
@@ -474,39 +486,40 @@ $(document).ready(function(){
     });
 
     // global vars
-    var testimonial = "";
+    var cms_page = "";
 
-    // fetch testimonial
-    function fetch_testimonial(id){
+    // fetch cms_page
+    function fetch_cms_page(id){
         $.ajax({
-            url: '<?php echo(route("testimonial.show", 0)); ?>',
+            url: '<?php echo(route("cms_page.show", 0)); ?>',
             type: 'GET',
             data: {id: id},
             dataType: 'JSON',
             async: false,
             success: function (data) {
-                testimonial = data.testimonial;
+                cms_page = data.cms_page;
             }
         });
     }
 
     // create
-    $('#add_testimonial').on('click', function(){
+    $('#add_cms_page').on('click', function(){
         
     });
 
     // edit
     $('.editButton').on('click', function(){
         var id = $(this).data('id');
-        fetch_testimonial(id);
+        fetch_cms_page(id);
         $('#hidden').val(id);
 
-        $('#editForm .name').val(testimonial.name ? testimonial.name : '');
-        $('#editForm .designation').val(testimonial.designation ? testimonial.designation : '');
-        $('#editForm .description').val(testimonial.description ? testimonial.description : '');
+        $('#editForm .name').val(cms_page.name ? cms_page.name : '');
+        $('#editForm .title').val(cms_page.title ? cms_page.title : '');
+        $('#editForm .content').val(cms_page.content ? cms_page.content : '');
+        $('#editForm .content_2').val(cms_page.content_2 ? cms_page.content_2 : '');
 
         // status
-        if(testimonial.status == "Active"){
+        if(cms_page.status == "Active"){
           $('#editForm .status').prop('checked', true);
         }
         else{
@@ -517,28 +530,28 @@ $(document).ready(function(){
         // un hide preview div
         $('#editForm .preview_wrapper').prop('hidden', false);
         // update preview image
-        if(testimonial.image){
-          var src = `<?php echo(asset('img/testimonials') . '/temp'); ?>`;
-          src = src.replace('temp', testimonial.image);
+        if(cms_page.image){
+          var src = `<?php echo(asset('img/cms_pages') . '/temp'); ?>`;
+          src = src.replace('temp', cms_page.image);
         }
         else{
           var src = `<?php echo(asset('img/noimg.jpg')); ?>`;
         }
         $('#editForm .preview_image').prop('src', src);
         
-        $('#editTestimonialModal').modal('show');
+        $('#editCmsPageModal').modal('show');
     });
 
     // detail
     $('.detailButton').on('click', function(){
       $('.bci').trigger('click');
       var id = $(this).data('id');
-      fetch_testimonial(id);
-      // var testimonial = $(this).data('object');
-      $('.name').html(testimonial.name ? testimonial.name : '');
-      $('.contact_number').html(testimonial.contact_number ? testimonial.contact_number : '');
-      $('.whatsapp_number').html(testimonial.whatsapp_number);
-      if(testimonial.shop_keeper_picture){
+      fetch_cms_page(id);
+      // var cms_page = $(this).data('object');
+      $('.name').html(cms_page.name ? cms_page.name : '');
+      $('.contact_number').html(cms_page.contact_number ? cms_page.contact_number : '');
+      $('.whatsapp_number').html(cms_page.whatsapp_number);
+      if(cms_page.shop_keeper_picture){
           var shop_path = $(this).data('shopkeeper');
           $('.shop_keeper_picture').attr('src', shop_path);
       }
@@ -546,13 +559,13 @@ $(document).ready(function(){
           var shop_path = '{{asset("img/logo.png")}}';
           $('.shop_keeper_picture').attr('src', shop_path);
       }
-      $('.type').html(testimonial.type ? testimonial.type : '');
-      $('.shop_name').html(testimonial.shop_name ? testimonial.shop_name : '');
-      $('.shop_number').html(testimonial.shop_number ? testimonial.shop_number : '');
-      $('.floor').html(testimonial.floor ? testimonial.floor : '');
-      $('.area').html((testimonial.market && testimonial.market.area) ? testimonial.market.area.name : '');
-      $('.market').html(testimonial.market ? testimonial.market.name : '');
-      if(testimonial.shop_picture){
+      $('.type').html(cms_page.type ? cms_page.type : '');
+      $('.shop_name').html(cms_page.shop_name ? cms_page.shop_name : '');
+      $('.shop_number').html(cms_page.shop_number ? cms_page.shop_number : '');
+      $('.floor').html(cms_page.floor ? cms_page.floor : '');
+      $('.area').html((cms_page.market && cms_page.market.area) ? cms_page.market.area.name : '');
+      $('.market').html(cms_page.market ? cms_page.market.name : '');
+      if(cms_page.shop_picture){
           var shop_path = $(this).data('shop');
           $('.shop_picture').attr('src', shop_path);
       }
@@ -562,28 +575,28 @@ $(document).ready(function(){
       }
       // image gallery work
       $('.gallery_wrapper').html('');
-      if(testimonial.testimonial_images.length > 0){
-          for(var i = 0; i < testimonial.testimonial_images.length; i++){
-          $('.gallery_wrapper').append(`<div class="col-md-4 mb-3"><a target="_blank" href="{{asset('img/testimonial_images')}}/`+testimonial.testimonial_images[i].location+`" class="col-md-12"><img class="col-md-12 shop_keeper_picture" src="{{asset('img/testimonial_images')}}/`+testimonial.testimonial_images[i].location+`"></a><button class="btn btn_del_testimonial_image" value="`+testimonial.testimonial_images[i].id+`" type="button"><i class="fas fa-trash red ml-1"></i></button></div>`);
+      if(cms_page.cms_page_images.length > 0){
+          for(var i = 0; i < cms_page.cms_page_images.length; i++){
+          $('.gallery_wrapper').append(`<div class="col-md-4 mb-3"><a target="_blank" href="{{asset('img/cms_page_images')}}/`+cms_page.cms_page_images[i].location+`" class="col-md-12"><img class="col-md-12 shop_keeper_picture" src="{{asset('img/cms_page_images')}}/`+cms_page.cms_page_images[i].location+`"></a><button class="btn btn_del_cms_page_image" value="`+cms_page.cms_page_images[i].id+`" type="button"><i class="fas fa-trash red ml-1"></i></button></div>`);
           }
       }
-      $('.status').html(testimonial.status ? testimonial.status : '');
-      $('.visiting_days').html(testimonial.visiting_days ? testimonial.visiting_days : '');
-      $('.cash_on_delivery').html(testimonial.cash_on_delivery ? testimonial.cash_on_delivery : '');
-      $('.opening_balance').html(testimonial.opening_balance ? ("Rs. " + testimonial.opening_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
-      $('.business_to_date').html(testimonial.business_to_date ? ("Rs. " + testimonial.business_to_date.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
-      $('.outstanding_balance').html(testimonial.outstanding_balance ? ("Rs. " + testimonial.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
-      // $('.special_discount').html(testimonial.special_discount ? ("Rs. " + testimonial.special_discount) : '');
-      $('#viewTestimonialModal').modal('show');
+      $('.status').html(cms_page.status ? cms_page.status : '');
+      $('.visiting_days').html(cms_page.visiting_days ? cms_page.visiting_days : '');
+      $('.cash_on_delivery').html(cms_page.cash_on_delivery ? cms_page.cash_on_delivery : '');
+      $('.opening_balance').html(cms_page.opening_balance ? ("Rs. " + cms_page.opening_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
+      $('.business_to_date').html(cms_page.business_to_date ? ("Rs. " + cms_page.business_to_date.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
+      $('.outstanding_balance').html(cms_page.outstanding_balance ? ("Rs. " + cms_page.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
+      // $('.special_discount').html(cms_page.special_discount ? ("Rs. " + cms_page.special_discount) : '');
+      $('#viewCmsPageModal').modal('show');
       });
 
       // delete
       $('.deleteButton').on('click', function(){
       var id = $(this).data('id');
-      $('#deleteForm').attr('action', "{{route('testimonial.destroy', 1)}}");
+      $('#deleteForm').attr('action', "{{route('cms_page.destroy', 1)}}");
       $('#deleteForm .hidden').val(id);
-      $('#deleteTestimonialModalLabel').text('Delete Testimonial: ' + $('.name' + id).html() + "?");
-      $('#deleteTestimonialModal').modal('show');
+      $('#deleteCmsPageModalLabel').text('Delete CmsPage: ' + $('.name' + id).html() + "?");
+      $('#deleteCmsPageModal').modal('show');
     });
 
     // on show-more click (see more collapse)

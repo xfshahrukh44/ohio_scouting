@@ -4,15 +4,20 @@
         <label>Name:</label>
         <input type="text" name="name" placeholder="Name" class="form-control name" required>
     </div>
-    <!-- designation -->
+    <!-- title -->
     <div class="form-group col-md-6 col-sm-3">
-        <label>Designation:</label>
-        <input type="text" name="designation" placeholder="Designation" class="form-control designation" required>
+        <label>Title:</label>
+        <input type="text" name="title" placeholder="Title" class="form-control title" required>
     </div>
-    <!-- description -->
+    <!-- content -->
     <div class="form-group col-md-12">
-        <label>Description:</label>
-        <textarea type="text" name="description" placeholder="Description" class="form-control description"></textarea>
+        <label>Content:</label>
+        <textarea type="text" name="content" placeholder="Content" class="form-control content"></textarea>
+    </div>
+    <!-- content_2 -->
+    <div class="form-group col-md-12">
+        <label>Content 2:</label>
+        <textarea type="text" name="content_2" placeholder="Content 2" class="form-control content_2"></textarea>
     </div>
     <!-- image -->
     <div class="form-group col-md-12">

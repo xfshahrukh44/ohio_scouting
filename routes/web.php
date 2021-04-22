@@ -37,11 +37,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::apiResources(['logo'=>'Admin\LogoController']);
     Route::apiResources(['setting'=>'Admin\SettingController']);
     Route::apiResources(['testimonial'=>'Admin\TestimonialController']);
+    Route::apiResources(['cms_page'=>'Admin\CmsPageController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------
     Route::get('/search_users', 'Admin\UserController@search_users')->name('search_users');
     Route::get('/search_testimonials', 'Admin\TestimonialController@search_testimonials')->name('search_testimonials');
+    Route::get('/search_cms_pages', 'Admin\TestimonialController@search_cms_pages')->name('search_cms_pages');
     // ---------------------------------------------------------------------------------------------------------
 });
 
