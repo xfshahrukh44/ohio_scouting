@@ -58,6 +58,12 @@ return [
             'root' => public_path('img/logos'),
         ],
 
+        // testimonials
+        'public_testimonials' => [
+            'driver' => 'local',
+            'root' => public_path('img/testimonials'),
+        ],
+
     ],
 
     /*
