@@ -136,4 +136,12 @@ class TestimonialController extends Controller
 
         return view('admin.testimonial.testimonial', compact('testimonials'));
     }
+
+    public function toggle_testimonial_status(Request $request)
+    {
+        if(!(isset($request['id']))){
+            return '';
+        }
+        return $this->testimonialService->toggle_testimonial_status($request->id);
+    }
 }

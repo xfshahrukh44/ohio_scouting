@@ -47,6 +47,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::get('/search_cms_pages', 'Admin\TestimonialController@search_cms_pages')->name('search_cms_pages');
     Route::get('/search_banners', 'Admin\TestimonialController@search_banners')->name('search_banners');
     // ---------------------------------------------------------------------------------------------------------
+
+    // HELPERS---------------------------------------------------------------------------------------------------------------
+    Route::get('/toggle_cms_page_status', 'Admin\CmsPageController@toggle_cms_page_status')->name('toggle_cms_page_status');
+    Route::get('/toggle_banner_status', 'Admin\BannerController@toggle_banner_status')->name('toggle_banner_status');
+    Route::get('/toggle_testimonial_status', 'Admin\TestimonialController@toggle_testimonial_status')->name('toggle_testimonial_status');
+    // ----------------------------------------------------------------------------------------------------------------------
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

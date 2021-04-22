@@ -9,5 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class TestimonialService extends TestimonialRepository
 {
-    
+    public function toggle_testimonial_status($id)
+    {
+        if(!$testimonial = Testimonial::find($id)){
+            return '';
+        }
+
+        $testimonial->status = (($testimonial->status == "Inactive") ? ("Active") : "Inactive");
+        $testimonial->save();
+        return '';
+    }
 }

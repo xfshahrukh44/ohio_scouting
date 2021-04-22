@@ -166,7 +166,16 @@
                     </td>
 
                     <!-- status -->
-                    <td class="{{'status'.$banner->id}}">{{$banner->status}}</td>
+                    <td class="{{'status'.$banner->id}}">
+                      <label class="switch">
+                        @if($banner->status == "Active")
+                          <input type="checkbox" data-id="{{$banner->id}}" class="input_status" checked>
+                        @else
+                          <input type="checkbox" data-id="{{$banner->id}}" class="input_status">
+                        @endif
+                        <span class="slider"></span>
+                      </label>
+                    </td>
 
                     <!-- actions -->
                     <td width="100">
@@ -486,6 +495,22 @@ $(document).ready(function(){
         });
     }
 
+    // toggle_status
+    function toggle_status(id){
+      $.ajax({
+          url: '<?php echo(route('toggle_banner_status')); ?>',
+          type: 'GET',
+          data: {
+            id: id
+          },
+          dataType: 'JSON',
+          async: false,
+          success: function (data) {
+            
+          }
+      });
+    }
+
     // create
     $('#add_banner').on('click', function(){
         
@@ -604,6 +629,12 @@ $(document).ready(function(){
   
           reader.readAsDataURL(input.files[0]);
       }
+    });
+
+    // on .input_status click
+    $('.input_status').on('click', function(){
+      var id = $(this).data('id');
+      toggle_status(id);
     });
 });
 </script>

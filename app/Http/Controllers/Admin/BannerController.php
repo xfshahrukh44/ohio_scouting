@@ -119,4 +119,12 @@ class BannerController extends Controller
 
         return view('admin.banner.banner', compact('banners'));
     }
+
+    public function toggle_banner_status(Request $request)
+    {
+        if(!(isset($request['id']))){
+            return '';
+        }
+        return $this->bannerService->toggle_banner_status($request->id);
+    }
 }

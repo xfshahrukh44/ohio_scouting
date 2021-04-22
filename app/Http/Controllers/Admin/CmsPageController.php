@@ -138,4 +138,12 @@ class CmsPageController extends Controller
 
         return view('admin.cms_page.cms_page', compact('cms_pages'));
     }
+
+    public function toggle_cms_page_status(Request $request)
+    {
+        if(!(isset($request['id']))){
+            return '';
+        }
+        return $this->cmsPageService->toggle_cms_page_status($request->id);
+    }
 }
