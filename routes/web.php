@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     // API RESOURCES-------------------------------------------------
     Route::apiResources(['user'=>'Admin\UserController']);
     Route::apiResources(['logo'=>'Admin\LogoController']);
+    Route::apiResources(['setting'=>'Admin\SettingController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------

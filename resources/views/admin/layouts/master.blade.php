@@ -114,19 +114,29 @@
                     <ul class="nav nav-treeview">
                         <!-- Logo Management -->
                         <li class="nav-item">
-                            <a href="{{route('logo.index')}}" class="nav-link">
+                            <a href="{{route('logo.index')}}" class="nav-link ml-2">
                                 <small>Logo Management</small>
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <!-- user management -->
+                <!-- Settings -->
+                <li class="nav-item">
+                    <a href="{{route('setting.index')}}" class="nav-link">
+                      <i class="nav-icon fas fa-cogs "></i>
+                      <p>
+                        Settings
+                      </p>
+                    </a>
+                </li>
+
+                <!-- User management -->
                 <li class="nav-item">
                     <a href="{{route('user.index')}}" class="nav-link">
                       <i class="nav-icon fas fa-user "></i>
                       <p>
-                        User Management
+                        User management
                       </p>
                     </a>
                 </li>
@@ -149,7 +159,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
+      <div class="container-fluid" style="overflow-x: hidden; overflow-y: auto; max-height: 100%;">
         @yield('content_body')
       </div><!-- /.container-fluid -->
     </section>
