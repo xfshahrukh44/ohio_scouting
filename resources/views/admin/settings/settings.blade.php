@@ -35,7 +35,7 @@
         <!-- submit button -->
         <div class="col-md-10"></div>
         <div class="form-group col-md-2 text-center">
-            <button type="submit" class="btn btn-primary form-control">Save</button>
+            <button type="submit" class="btn btn-primary form-control-sm"><small>Save Changes</small></button>
         </div>
     </form>
     <hr>
