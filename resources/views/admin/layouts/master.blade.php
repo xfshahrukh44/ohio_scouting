@@ -127,6 +127,16 @@
                     </ul>
                 </li>
 
+                <!-- Banner Management -->
+                <li class="nav-item">
+                    <a href="{{route('banner.index')}}" class="nav-link">
+                      <i class="nav-icon fas fa-text-width "></i>
+                      <p>
+                        Banner Management
+                      </p>
+                    </a>
+                </li>
+
                 <!-- Testimonials -->
                 <li class="nav-item">
                     <a href="{{route('testimonial.index')}}" class="nav-link">
