@@ -575,10 +575,10 @@ $(document).ready(function(){
       $('.outstanding_balance').html(testimonial.outstanding_balance ? ("Rs. " + testimonial.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
       // $('.special_discount').html(testimonial.special_discount ? ("Rs. " + testimonial.special_discount) : '');
       $('#viewTestimonialModal').modal('show');
-      });
+    });
 
-      // delete
-      $('.deleteButton').on('click', function(){
+    // delete
+    $('.deleteButton').on('click', function(){
       var id = $(this).data('id');
       $('#deleteForm').attr('action', "{{route('testimonial.destroy', 1)}}");
       $('#deleteForm .hidden').val(id);

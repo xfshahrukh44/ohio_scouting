@@ -559,14 +559,14 @@ $(document).ready(function(){
       $('.outstanding_balance').html(banner.outstanding_balance ? ("Rs. " + banner.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
       // $('.special_discount').html(banner.special_discount ? ("Rs. " + banner.special_discount) : '');
       $('#viewBannerModal').modal('show');
-      });
+    });
 
-      // delete
-      $('.deleteButton').on('click', function(){
+    // delete
+    $('.deleteButton').on('click', function(){
       var id = $(this).data('id');
       $('#deleteForm').attr('action', "{{route('banner.destroy', 1)}}");
       $('#deleteForm .hidden').val(id);
-      $('#deleteBannerModalLabel').text('Delete Banner: ' + $('.name' + id).html() + "?");
+      $('#deleteBannerModalLabel').text('Delete Banner: ' + $('.page' + id).html() + "?");
       $('#deleteBannerModal').modal('show');
     });
 

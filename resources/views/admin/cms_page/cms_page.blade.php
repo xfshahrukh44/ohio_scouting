@@ -588,10 +588,10 @@ $(document).ready(function(){
       $('.outstanding_balance').html(cms_page.outstanding_balance ? ("Rs. " + cms_page.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
       // $('.special_discount').html(cms_page.special_discount ? ("Rs. " + cms_page.special_discount) : '');
       $('#viewCmsPageModal').modal('show');
-      });
+    });
 
-      // delete
-      $('.deleteButton').on('click', function(){
+    // delete
+    $('.deleteButton').on('click', function(){
       var id = $(this).data('id');
       $('#deleteForm').attr('action', "{{route('cms_page.destroy', 1)}}");
       $('#deleteForm .hidden').val(id);
