@@ -2,29 +2,29 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\Listing\AllListingException;
-use App\Exceptions\Listing\CreateListingException;
-use App\Exceptions\Listing\UpdateListingException;
-use App\Exceptions\Listing\DeleteListingException;
-use App\Models\Listing;
+use App\Exceptions\ListingImage\AllListingImageException;
+use App\Exceptions\ListingImage\CreateListingImageException;
+use App\Exceptions\ListingImage\UpdateListingImageException;
+use App\Exceptions\ListingImage\DeleteListingImageException;
+use App\Models\ListingImage;
 
-abstract class ListingRepository implements RepositoryInterface
+abstract class ListingImageRepository implements RepositoryInterface
 {
     private $model;
     
-    public function __construct(Listing $listing)
+    public function __construct(ListingImage $listing_image)
     {
-        $this->model = $listing;
+        $this->model = $listing_image;
     }
     
     public function create(array $data)
     {
         try 
         {    
-            $listing = $this->model->create($data);
+            $listing_image = $this->model->create($data);
             
             return [
-                'listing' => $this->find($listing->id)
+                'listing_image' => $this->find($listing_image->id)
             ];
         }
         catch (\Exception $exception) {
@@ -39,7 +39,7 @@ abstract class ListingRepository implements RepositoryInterface
             {
                 return [
                     'success' => false,
-                    'message' => 'Could`nt find listing',
+                    'message' => 'Could`nt find listing_image',
                 ];
             }
 
@@ -48,11 +48,11 @@ abstract class ListingRepository implements RepositoryInterface
             return [
                 'success' => true,
                 'message' => 'Deleted successfully',
-                'listing' => $temp,
+                'listing_image' => $temp,
             ];
         }
         catch (\Exception $exception) {
-            throw new DeleteListingException($exception->getMessage());
+            throw new DeleteListingImageException($exception->getMessage());
         }
     }
     
@@ -63,7 +63,7 @@ abstract class ListingRepository implements RepositoryInterface
             {
                 return [
                     'success' => false,
-                    'message' => 'Could`nt find listing',
+                    'message' => 'Could`nt find listing_image',
                 ];
             }
 
@@ -73,11 +73,11 @@ abstract class ListingRepository implements RepositoryInterface
             return [
                 'success' => true,
                 'message' => 'Updated successfully!',
-                'listing' => $this->find($temp->id),
+                'listing_image' => $this->find($temp->id),
             ];
         }
         catch (\Exception $exception) {
-            throw new UpdateListingException($exception->getMessage());
+            throw new UpdateListingImageException($exception->getMessage());
         }
     }
     
@@ -85,17 +85,17 @@ abstract class ListingRepository implements RepositoryInterface
     {
         try 
         {
-            $listing = $this->model::with('listing_images')->find($id);
-            if(!$listing)
+            $listing_image = $this->model::find($id);
+            if(!$listing_image)
             {
                 return [
                     'success' => false,
-                    'message' => 'Could`nt find listing',
+                    'message' => 'Could`nt find listing_image',
                 ];
             }
             return [
                 'success' => true,
-                'listing' => $listing,
+                'listing_image' => $listing_image,
             ];
         }
         catch (\Exception $exception) {
@@ -109,7 +109,7 @@ abstract class ListingRepository implements RepositoryInterface
             return $this->model::all();
         }
         catch (\Exception $exception) {
-            throw new AllListingException($exception->getMessage());
+            throw new AllListingImageException($exception->getMessage());
         }
     }
 
@@ -119,24 +119,7 @@ abstract class ListingRepository implements RepositoryInterface
             return $this->model::orderBy('created_at', 'DESC')->paginate($pagination);
         }
         catch (\Exception $exception) {
-            throw new AllListingException($exception->getMessage());
+            throw new AllListingImageException($exception->getMessage());
         }
-    }
-
-    public function search_listings($query)
-    {
-        // foreign fields
-
-        // search block
-        $listings = $this->model::where('title', 'LIKE', '%'.$query.'%')
-                        ->orWhere('city', 'LIKE', '%'.$query.'%')
-                        ->orWhere('location', 'LIKE', '%'.$query.'%')
-                        ->orWhere('type', 'LIKE', '%'.$query.'%')
-                        ->orWhere('price', 'LIKE', '%'.$query.'%')
-                        ->orWhere('area', 'LIKE', '%'.$query.'%')
-                        ->orWhere('purpose', 'LIKE', '%'.$query.'%')
-                        ->paginate(env('PAGINATION'));
-
-        return $listings;
     }
 }

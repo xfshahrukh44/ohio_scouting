@@ -41,15 +41,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::apiResources(['banner'=>'Admin\BannerController']);
     Route::apiResources(['brand'=>'Admin\BrandController']);
     Route::apiResources(['listing'=>'Admin\ListingController']);
+    Route::apiResources(['listing_image'=>'Admin\ListingImageController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------
     Route::get('/search_users', 'Admin\UserController@search_users')->name('search_users');
     Route::get('/search_testimonials', 'Admin\TestimonialController@search_testimonials')->name('search_testimonials');
-    Route::get('/search_cms_pages', 'Admin\TestimonialController@search_cms_pages')->name('search_cms_pages');
-    Route::get('/search_banners', 'Admin\TestimonialController@search_banners')->name('search_banners');
-    Route::get('/search_brands', 'Admin\TestimonialController@search_brands')->name('search_brands');
-    Route::get('/search_listings', 'Admin\TestimonialController@search_listings')->name('search_listings');
+    Route::get('/search_cms_pages', 'Admin\CmsPageController@search_cms_pages')->name('search_cms_pages');
+    Route::get('/search_banners', 'Admin\BannerController@search_banners')->name('search_banners');
+    Route::get('/search_brands', 'Admin\BrandController@search_brands')->name('search_brands');
+    Route::get('/search_listings', 'Admin\ListingController@search_listings')->name('search_listings');
     // ---------------------------------------------------------------------------------------------------------
 
     // HELPERS---------------------------------------------------------------------------------------------------------------

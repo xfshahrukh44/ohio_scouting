@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ListingService;
+use App\Services\ListingImageService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\Gate;
 class ListingController extends Controller
 {
     private $listingService;
+    private $listingImageService;
 
-    public function __construct(ListingService $listingService)
+    public function __construct(ListingService $listingService, ListingImageService $listingImageService)
     {
         $this->listingService = $listingService;
+        $this->listingImageService = $listingImageService;
         $this->middleware('auth');
     }
     
@@ -66,21 +69,21 @@ class ListingController extends Controller
         $listing = ($this->listingService->create($req))['listing']['listing'];
 
         // listing_images (multiple)
-        // if($request->listing_images){
-        //     $listing_images = [];
-        //     foreach($request->listing_images as $listing_image){
-        //         $image = $listing_image;
-        //         $imageName = Str::random(10).'.png';
-        //         Storage::disk('listing_images')->put($imageName, \File::get($image));
-        //         array_push($listing_images, $imageName);
-        //     }
-        //     foreach($listing_images as $listing_image){
-        //         $this->listingImageService->create([
-        //             'listing_id' => $listing->id,
-        //             'location' => $listing_image,
-        //         ]);
-        //     }
-        // }
+        if($request->listing_images){
+            $listing_images = [];
+            foreach($request->listing_images as $listing_image){
+                $image = $listing_image;
+                $imageName = Str::random(10).'.png';
+                Storage::disk('public_listings')->put($imageName, \File::get($image));
+                array_push($listing_images, $imageName);
+            }
+            foreach($listing_images as $listing_image){
+                $this->listingImageService->create([
+                    'listing_id' => $listing->id,
+                    'location' => $listing_image,
+                ]);
+            }
+        }
 
         return redirect()->back();
     }
@@ -133,21 +136,21 @@ class ListingController extends Controller
         $listing = ($this->listingService->update($req, $id))['listing']['listing'];
 
         // listing_images (multiple)
-        // if($request->listing_images){
-        //     $listing_images = [];
-        //     foreach($request->listing_images as $listing_image){
-        //         $image = $listing_image;
-        //         $imageName = Str::random(10).'.png';
-        //         Storage::disk('listing_images')->put($imageName, \File::get($image));
-        //         array_push($listing_images, $imageName);
-        //     }
-        //     foreach($listing_images as $listing_image){
-        //         $this->listingImageService->create([
-        //             'listing_id' => $listing->id,
-        //             'location' => $listing_image,
-        //         ]);
-        //     }
-        // }
+        if($request->listing_images){
+            $listing_images = [];
+            foreach($request->listing_images as $listing_image){
+                $image = $listing_image;
+                $imageName = Str::random(10).'.png';
+                Storage::disk('public_listings')->put($imageName, \File::get($image));
+                array_push($listing_images, $imageName);
+            }
+            foreach($listing_images as $listing_image){
+                $this->listingImageService->create([
+                    'listing_id' => $listing->id,
+                    'location' => $listing_image,
+                ]);
+            }
+        }
 
         return redirect()->back();
     }

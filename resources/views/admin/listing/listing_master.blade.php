@@ -80,4 +80,9 @@
         <label for="">Description:</label>
         <textarea type="text" name="description" placeholder="Description" class="form-control form-control-sm description"></textarea>
     </div>
+    <!-- listing_images -->
+    <div class="form-group col-md-12">
+        <label>Additional Images:</label> <br>
+        <input type="file" name="listing_images[]" class="form-control" multiple>
+    </div>
 </div>

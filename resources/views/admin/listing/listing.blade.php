@@ -377,7 +377,7 @@ $(document).ready(function(){
 
     // delete_listing_image
     function delete_listing_image(listing_image_id, image_container){
-        var temp_route = "php echo(route('listing_image.destroy', ':id'));";
+        var temp_route = "<?php echo(route('listing_image.destroy', ':id'));?>";
         temp_route = temp_route.replace(':id', listing_image_id);
         $.ajax({
             url: temp_route,
@@ -476,11 +476,11 @@ $(document).ready(function(){
 
         // image gallery work
         $('.gallery_wrapper').html('');
-        // if(listing.listing_images.length > 0){
-        //     for(var i = 0; i < listing.listing_images.length; i++){
-        //         $('.gallery_wrapper').append(`<div class="col-md-4 mb-3"><a target="_blank" href="{{asset('img/listing_images')}}/`+listing.listing_images[i].location+`" class="col-md-12"><img class="col-md-12 shop_keeper_picture" src="{{asset('img/listing_images')}}/`+listing.listing_images[i].location+`"></a><button class="btn btn_del_listing_image" value="`+listing.listing_images[i].id+`" type="button"><i class="fas fa-trash red ml-1"></i></button></div>`);
-        //     }
-        // }
+        if(listing.listing_images.length > 0){
+            for(var i = 0; i < listing.listing_images.length; i++){
+                $('.gallery_wrapper').append(`<div class="col-md-4 mb-3"><a target="_blank" href="{{asset('img/listings')}}/`+listing.listing_images[i].location+`" class="col-md-12"><img class="col-md-12 listing_image" src="{{asset('img/listings')}}/`+listing.listing_images[i].location+`"></a><button class="btn btn_del_listing_image" value="`+listing.listing_images[i].id+`" type="button"><i class="fas fa-trash red ml-1"></i></button></div>`);
+            }
+        }
         $('#viewListingModal').modal('show');
     });
     // delete
