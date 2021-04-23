@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::apiResources(['testimonial'=>'Admin\TestimonialController']);
     Route::apiResources(['cms_page'=>'Admin\CmsPageController']);
     Route::apiResources(['banner'=>'Admin\BannerController']);
+    Route::apiResources(['brand'=>'Admin\BrandController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::get('/search_testimonials', 'Admin\TestimonialController@search_testimonials')->name('search_testimonials');
     Route::get('/search_cms_pages', 'Admin\TestimonialController@search_cms_pages')->name('search_cms_pages');
     Route::get('/search_banners', 'Admin\TestimonialController@search_banners')->name('search_banners');
+    Route::get('/search_brands', 'Admin\TestimonialController@search_brands')->name('search_brands');
     // ---------------------------------------------------------------------------------------------------------
 
     // HELPERS---------------------------------------------------------------------------------------------------------------

@@ -127,6 +127,16 @@
                     </ul>
                 </li>
 
+                <!-- Brand Management -->
+                <li class="nav-item">
+                    <a href="{{route('brand.index')}}" class="nav-link">
+                      <i class="nav-icon far fa-copyright "></i>
+                      <p>
+                        Brand Management
+                      </p>
+                    </a>
+                </li>
+
                 <!-- Banner Management -->
                 <li class="nav-item">
                     <a href="{{route('banner.index')}}" class="nav-link">

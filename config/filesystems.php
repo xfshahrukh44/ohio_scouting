@@ -70,6 +70,12 @@ return [
             'root' => public_path('img/cms_pages'),
         ],
 
+        // brands
+        'public_brands' => [
+            'driver' => 'local',
+            'root' => public_path('img/brands'),
+        ],
+
     ],
 
     /*
