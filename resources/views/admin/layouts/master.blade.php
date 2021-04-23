@@ -102,6 +102,16 @@
                     </a>
                 </li>
 
+                <!-- Listings -->
+                <li class="nav-item">
+                    <a href="{{route('listing.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-stream "></i>
+                        <p>
+                            Listings
+                        </p>
+                    </a>
+                </li>
+
                 <!-- Layout -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

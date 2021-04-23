@@ -76,6 +76,12 @@ return [
             'root' => public_path('img/brands'),
         ],
 
+        // listings
+        'public_listings' => [
+            'driver' => 'local',
+            'root' => public_path('img/listings'),
+        ],
+
     ],
 
     /*
