@@ -126,7 +126,7 @@
                     <td class="{{'location'.$listing->id}}">{{$listing->location}}</td>
                     <td class="{{'type'.$listing->id}}">{{$listing->type}}</td>
                     <td class="{{'price'.$listing->id}}">{{$listing->price}}</td>
-                    <td class="{{'area'.$listing->id}}">{{$listing->area}}</td>
+                    <td class="{{'area'.$listing->id}}">{{$listing->area}} Sq. Yd.</td>
                     <td class="{{'status'.$listing->id}}">{{$listing->status}}</td>
                     <td class="{{'purpose'.$listing->id}}">{{$listing->purpose}}</td>
                     <td>
