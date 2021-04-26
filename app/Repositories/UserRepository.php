@@ -210,6 +210,7 @@ abstract class UserRepository implements RepositoryInterface
         $users = User::where(function($q) use($query){
                             $q->orWhere('name', 'LIKE', '%'.$query.'%');
                             $q->orWhere('email', 'LIKE', '%'.$query.'%');
+                            $q->orWhere('type', 'LIKE', '%'.$query.'%');
                         })
                         ->paginate(env('PAGINATION'));
 
