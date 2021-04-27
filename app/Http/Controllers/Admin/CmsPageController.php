@@ -33,7 +33,7 @@ class CmsPageController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'title' => 'required',
             'content' => 'sometimes',
@@ -41,9 +41,6 @@ class CmsPageController extends Controller
             'image' => 'sometimes',
             'status' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         // image work
         $req = Arr::except($request->all(),['image']);
@@ -83,7 +80,7 @@ class CmsPageController extends Controller
         $id = $request->hidden;
         $cms_page = ($this->show($id))['cms_page'];
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'sometimes',
             'title' => 'sometimes',
             'content' => 'sometimes',
@@ -91,10 +88,6 @@ class CmsPageController extends Controller
             'image' => 'sometimes',
             'status' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
-
         
         // image work
         $req = Arr::except($request->all(),['image']);

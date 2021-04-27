@@ -33,16 +33,13 @@ class BannerController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'page' => 'required',
             'title' => 'sometimes',
             'subtitle' => 'sometimes',
             'description' => 'sometimes',
             'status' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         // req
         $req = $request->all();
@@ -74,17 +71,13 @@ class BannerController extends Controller
         $id = $request->hidden;
         $banner = ($this->show($id))['banner'];
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'page' => 'sometimes',
             'title' => 'sometimes',
             'subtitle' => 'sometimes',
             'description' => 'sometimes',
             'status' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
-
         
         // req
         $req = $request->all();

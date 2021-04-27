@@ -2,10 +2,18 @@
 
 @section('content_header')
 <div class="row mb-2">
-  <div class="col-sm-6">
-<h1 class="m-0 text-dark"><i class="nav-icon fas fa-users"></i> Users</h1>
-
-</div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <h1 class="m-0 text-dark"><i class="nav-icon fas fa-users"></i> Users</h1>
+    </div>
 </div>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>

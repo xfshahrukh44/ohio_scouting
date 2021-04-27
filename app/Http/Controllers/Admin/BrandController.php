@@ -33,14 +33,11 @@ class BrandController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'link' => 'sometimes',
             'image' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         // image work
         $req = Arr::except($request->all(),['image']);
@@ -71,14 +68,11 @@ class BrandController extends Controller
         $id = $request->hidden;
         $brand = ($this->show($id))['brand'];
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'sometimes',
             'image' => 'sometimes',
             'link' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         // image work
         $req = Arr::except($request->all(),['image']);

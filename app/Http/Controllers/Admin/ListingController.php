@@ -37,7 +37,7 @@ class ListingController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'image' => 'required',
             'title' => 'required|string',
             'city' => 'required|string',
@@ -52,9 +52,6 @@ class ListingController extends Controller
             'description' => 'sometimes',
             'status' => 'required|string',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         // image work
         $req = Arr::except($request->all(),['image']);
@@ -101,7 +98,7 @@ class ListingController extends Controller
         $id = $request->hidden;
         $listing = ($this->show($id))['listing'];
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'image' => 'sometimes',
             'title' => 'sometimes|string',
             'city' => 'sometimes|string',
@@ -116,9 +113,6 @@ class ListingController extends Controller
             'description' => 'sometimes',
             'status' => 'sometimes|string',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         
         // image work

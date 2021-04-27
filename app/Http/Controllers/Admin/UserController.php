@@ -40,14 +40,11 @@ class UserController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:4',
             'email' => 'required|unique:users,email',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
         
         if(!isset($request['type'])){
             $request['type'] = 'User';
@@ -77,14 +74,12 @@ class UserController extends Controller
                 'message' => 'Not allowed.'
             ]);
         }
-        $validator = Validator::make($request->all(), [
+        
+        $request->validate([
             'name' => 'sometimes|string|max:255',
             'password' => 'sometimes',
             'email' => 'sometimes|unique:users,email,'.$request->hidden,
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         if($request->password == NULL){
             $request = Arr::except($request,['password']);

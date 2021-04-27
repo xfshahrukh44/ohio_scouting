@@ -33,16 +33,13 @@ class TestimonialController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'designation' => 'required',
             'description' => 'sometimes',
             'image' => 'sometimes',
             'status' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         // image work
         $req = Arr::except($request->all(),['image']);
@@ -82,16 +79,13 @@ class TestimonialController extends Controller
         $id = $request->hidden;
         $testimonial = ($this->show($id))['testimonial'];
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'sometimes',
             'designation' => 'sometimes',
             'description' => 'sometimes',
             'image' => 'sometimes',
             'status' => 'sometimes',
         ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
 
         
         // image work
