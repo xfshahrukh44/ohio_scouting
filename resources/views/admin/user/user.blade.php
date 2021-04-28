@@ -110,18 +110,20 @@
 
                                         <!-- actions -->
                                         <td>
-                                            <!-- View Profile -->
-                                            <a href="#" class="viewProfileButton" data-id="{{$user->id}}" data-route="{{route('user.show',$user->id)}}">
-                                                <i class="fas fa-user green ml-1"></i>
-                                            </a>
-                                            <!-- Edit -->
-                                            <a href="#" class="editButton" data-id="{{$user->id}}">
-                                                <i class="fas fa-edit blue ml-1"></i>
-                                            </a>
-                                            <!-- Delete -->
-                                            <a href="#" class="deleteButton" data-id="{{$user->id}}">
-                                                <i class="fas fa-trash red ml-1"></i>
-                                            </a>
+                                            @if(auth()->user()->id == $user->id || auth()->user()->type == 'Admin')
+                                                <!-- View Profile -->
+                                                <a href="#" class="viewProfileButton" data-id="{{$user->id}}" data-route="{{route('user.show',$user->id)}}">
+                                                    <i class="fas fa-user green ml-1"></i>
+                                                </a>
+                                                <!-- Edit -->
+                                                <a href="#" class="editButton" data-id="{{$user->id}}">
+                                                    <i class="fas fa-edit blue ml-1"></i>
+                                                </a>
+                                                <!-- Delete -->
+                                                <a href="#" class="deleteButton" data-id="{{$user->id}}">
+                                                    <i class="fas fa-trash red ml-1"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endif
