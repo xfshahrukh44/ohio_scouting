@@ -239,7 +239,7 @@
                     <hr style="color:gray;">
                 </div>
                 <!-- section 1 -->
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tbody id="table_row_wrapper">
                             <tr role="row" class="odd">
@@ -258,11 +258,15 @@
                                 <td class="">Area</td>
                                 <td class="area"></td>
                             </tr>
+                            <tr role="row" class="odd">
+                                <td class="">Purpose</td>
+                                <td class="purpose"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <!-- section 2 -->
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tbody id="table_row_wrapper">
                             <tr role="row" class="odd">
@@ -282,18 +286,14 @@
                                 <td class="price"></td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td class="">Purpose</td>
-                                <td class="purpose"></td>
-                            </tr>
-                            <tr role="row" class="odd">
                                 <td class="">Status</td>
                                 <td class="status"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <!-- section 3 -->
-                <div class="col-md-4">
+                <!-- section 3 (description) -->
+                <div class="col-md-12">
                     <table class="table table-bordered table-striped">
                         <tbody id="table_row_wrapper">
                             <tr role="row" class="odd">
