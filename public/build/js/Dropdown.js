@@ -40,18 +40,6 @@ class Dropdown {
 
   // Public
 
-  toggleSubmenu() {
-    this._element.siblings().show().toggleClass('show')
-
-    if (!this._element.next().hasClass('show')) {
-      this._element.parents(SELECTOR_DROPDOWN_MENU).first().find('.show').removeClass('show').hide()
-    }
-
-    this._element.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', () => {
-      $('.dropdown-submenu .show').removeClass('show').hide()
-    })
-  }
-
   fixPosition() {
     const $element = $(SELECTOR_DROPDOWN_MENU_ACTIVE)
 
@@ -89,6 +77,18 @@ class Dropdown {
   }
 
   // Static
+
+  toggleSubmenu() {
+    this._element.siblings().show().toggleClass('show')
+
+    if (!this._element.next().hasClass('show')) {
+      this._element.parents(SELECTOR_DROPDOWN_MENU).first().find('.show').removeClass('show').hide()
+    }
+
+    this._element.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', () => {
+      $('.dropdown-submenu .show').removeClass('show').hide()
+    })
+  }
 
   static _jQueryInterface(config) {
     return this.each(function () {

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::apiResources(['brand'=>'Admin\BrandController']);
     Route::apiResources(['listing'=>'Admin\ListingController']);
     Route::apiResources(['listing_image'=>'Admin\ListingImageController']);
+    Route::apiResources(['news'=>'Admin\NewsController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::get('/search_banners', 'Admin\BannerController@search_banners')->name('search_banners');
     Route::get('/search_brands', 'Admin\BrandController@search_brands')->name('search_brands');
     Route::get('/search_listings', 'Admin\ListingController@search_listings')->name('search_listings');
+    Route::get('/search_news', 'Admin\ListingController@search_news')->name('search_news');
     // ---------------------------------------------------------------------------------------------------------
 
     // HELPERS---------------------------------------------------------------------------------------------------------------

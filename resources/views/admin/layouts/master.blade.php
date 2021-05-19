@@ -167,6 +167,16 @@
                     </a>
                 </li>
 
+                <!-- News Management -->
+                <li class="nav-item">
+                    <a href="{{route('news.index')}}" class="nav-link">
+                      <i class="nav-icon fas fa-newspaper "></i>
+                      <p>
+                        News Management
+                      </p>
+                    </a>
+                </li>
+
                 <!-- Settings -->
                 <li class="nav-item">
                     <a href="{{route('setting.index')}}" class="nav-link">

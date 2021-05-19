@@ -82,6 +82,12 @@ return [
             'root' => public_path('img/listings'),
         ],
 
+        // news
+        'public_news' => [
+            'driver' => 'local',
+            'root' => public_path('img/news'),
+        ],
+
     ],
 
     /*
