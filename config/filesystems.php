@@ -87,7 +87,12 @@ return [
             'driver' => 'local',
             'root' => public_path('img/news'),
         ],
-
+        
+        // videos
+        'public_videos' => [
+            'driver' => 'local',
+            'root' => public_path('img/videos'),
+        ],
     ],
 
     /*

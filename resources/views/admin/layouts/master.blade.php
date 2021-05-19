@@ -177,6 +177,16 @@
                     </a>
                 </li>
 
+                <!-- Video Management -->
+                <li class="nav-item">
+                    <a href="{{route('video.index')}}" class="nav-link">
+                      <i class="nav-icon fas fa-film "></i>
+                      <p>
+                        Video Management
+                      </p>
+                    </a>
+                </li>
+
                 <!-- Settings -->
                 <li class="nav-item">
                     <a href="{{route('setting.index')}}" class="nav-link">

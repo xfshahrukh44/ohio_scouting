@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::apiResources(['listing'=>'Admin\ListingController']);
     Route::apiResources(['listing_image'=>'Admin\ListingImageController']);
     Route::apiResources(['news'=>'Admin\NewsController']);
+    Route::apiResources(['video'=>'Admin\VideoController']);
     // --------------------------------------------------------------
 
     // SEARCH ROUTES--------------------------------------------------------------------------------------------
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::get('/search_brands', 'Admin\BrandController@search_brands')->name('search_brands');
     Route::get('/search_listings', 'Admin\ListingController@search_listings')->name('search_listings');
     Route::get('/search_news', 'Admin\ListingController@search_news')->name('search_news');
+    Route::get('/search_videos', 'Admin\ListingController@search_videos')->name('search_videos');
     // ---------------------------------------------------------------------------------------------------------
 
     // HELPERS---------------------------------------------------------------------------------------------------------------

@@ -12,7 +12,7 @@
             </ul>
         </div>
     @endif
-    <h1 class="m-0 text-dark"><i class="nav-icon fas fa-newspaper"></i> News</h1>
+    <h1 class="m-0 text-dark"><i class="nav-icon fas fa-film"></i> Videos</h1>
   </div>
 </div>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
@@ -118,12 +118,12 @@
     <div class="card">
       <div class="card-header">
         <div class="card-tools">
-            <button class="btn btn-success" id="add_item" data-toggle="modal" data-target="#addNewsModal">
+            <button class="btn btn-success" id="add_item" data-toggle="modal" data-target="#addVideoModal">
                 <i class="fas fa-plus"></i>
             </button>
         </div>
         <!-- search bar -->
-        <form action="{{route('search_news')}}" class="form-wrapper">
+        <form action="{{route('search_videos')}}" class="form-wrapper">
           <div class="row">
               <!-- search bar -->
               <div class="topnav col-md-4 col-sm-4">
@@ -146,60 +146,49 @@
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Image</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Title</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Type</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Description</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Date</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Link</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Actions</th>
               </tr>
             </thead>
             <tbody>
-              @if(count($news) > 0)
-                @foreach($news as $single_news)
+              @if(count($videos) > 0)
+                @foreach($videos as $video)
                   <tr role="row" class="odd">
                     <!-- image (fancybox) -->
-                    <td class="{{'image'.$single_news->id}}" width="140">
-                        <a class="fancybox" href="{{($single_news->image) ? (asset('img/news') . '/' . $single_news->image) : (asset('img/noimg.jpg'))}}">
-                            <img src="{{($single_news->image) ? (asset('img/news') . '/' . $single_news->image) : (asset('img/noimg.jpg'))}}" width="60%" alt="">
+                    <td class="{{'image'.$video->id}}" width="140">
+                        <a class="fancybox" href="{{($video->image) ? (asset('img/videos') . '/' . $video->image) : (asset('img/noimg.jpg'))}}">
+                            <img src="{{($video->image) ? (asset('img/videos') . '/' . $video->image) : (asset('img/noimg.jpg'))}}" width="60%" alt="">
                         </a>
                     </td>
 
                     <!-- title -->
-                    <td class="{{'title'.$single_news->id}}">{{$single_news->title}}</td>
+                    <td class="{{'title'.$video->id}}">{{$video->title}}</td>
 
                     <!-- type -->
-                    <td class="{{'type'.$single_news->id}}">{{$single_news->type}}</td>
+                    <td class="{{'type'.$video->id}}">{{$video->type}}</td>
 
-                    <!-- description (with see more collapse) -->
-                    <td class="{{'description'.$single_news->id}}" width="500">
-                      <div class="content hideContent">
-                        {{$single_news->description}}
-                      </div>
-                      <div class="show-more">
-                        <a href="#">Show more</a>
-                      </div></td>
-                    </td>
-
-                    <!-- date -->
-                    <td class="{{'date'.$single_news->id}}">{{return_date_wo_time($single_news->date)}}</td>
+                    <!-- link -->
+                    <td class="{{'link'.$video->id}}"><a href="{{$video->link}}" target="_blank">{{$video->link}}</a></td>
 
                     <!-- actions -->
                     <td width="100">
                         <!-- Detail -->
-                        <!-- <a href="#" class="detailButton" data-id="{{$single_news->id}}">
+                        <!-- <a href="#" class="detailButton" data-id="{{$video->id}}">
                           <i class="fas fa-eye green ml-1"></i>
                         </a> -->
                         <!-- Edit -->
-                        <a href="#" class="editButton" data-id="{{$single_news->id}}">
+                        <a href="#" class="editButton" data-id="{{$video->id}}">
                           <i class="fas fa-edit blue ml-1"></i>
                         </a>
                         <!-- Delete -->
-                        <a href="#" class="deleteButton" data-id="{{$single_news->id}}">
+                        <a href="#" class="deleteButton" data-id="{{$video->id}}">
                           <i class="fas fa-trash red ml-1"></i>
                         </a>
                     </td>
                   </tr>
                 @endforeach
               @else
-                <tr><td colspan="6"><h6 align="center">No news(s) found</h6></td></tr>
+                <tr><td colspan="5"><h6 align="center">No video(s) found</h6></td></tr>
               @endif
             </tbody>
             <tfoot>
@@ -209,8 +198,8 @@
         </div>
       <!-- /.card-body -->
       <div class="card-footer">
-        @if(count($news) > 0)
-        {{$news->appends(request()->except('page'))->links()}}
+        @if(count($videos) > 0)
+        {{$videos->appends(request()->except('page'))->links()}}
         @endif
       </div>
     </div>
@@ -218,18 +207,18 @@
 </div>
 
 <!-- Create view -->
-<div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel" aria-hidden="true">
+<div class="modal fade" id="addVideoModal" tabindex="-1" role="dialog" aria-labelledby="addVideoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addNewsModalLabel">Add New News</h5>
+        <h5 class="modal-title" id="addVideoModalLabel">Add New Video</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{route('news.store')}}" enctype="multipart/form-data">
+      <form method="POST" action="{{route('video.store')}}" enctype="multipart/form-data">
         @csrf
-        @include('admin.news.news_master')
+        @include('admin.video.video_master')
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Create</button>
         </div>
@@ -239,21 +228,21 @@
 </div>
 
 <!-- Edit view -->
-<div class="modal fade" id="editNewsModal" tabindex="-1" role="dialog" aria-labelledby="editNewsModalLabel" aria-hidden="true">
+<div class="modal fade" id="editVideoModal" tabindex="-1" role="dialog" aria-labelledby="editVideoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editNewsModalLabel">Edit News</h5>
+        <h5 class="modal-title" id="editVideoModalLabel">Edit Video</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="editForm" method="POST" action="{{route('news.update', 1)}}" enctype="multipart/form-data">
+      <form id="editForm" method="POST" action="{{route('video.update', 1)}}" enctype="multipart/form-data">
         <!-- hidden input -->
         @method('PUT')
         <input id="hidden" type="hidden" name="hidden">
         @csrf
-        @include('admin.news.news_master')
+        @include('admin.video.video_master')
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
@@ -263,11 +252,11 @@
 </div>
 
 <!-- Detail view -->
-<div class="modal fade" id="viewNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewVideoModal" tabindex="-1" role="dialog" aria-labelledby="addVideoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">News Detail</h5>
+                <h5 class="modal-title">Video Detail</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -277,7 +266,7 @@
             <!-- TABS -->
             <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active bci" data-toggle="tab" href="#bci">Basic News Information</a>
+                <a class="nav-link active bci" data-toggle="tab" href="#bci">Basic Video Information</a>
               </li>
               <li class="nav-item" role="presentation" >
                 <a class="nav-link" data-toggle="tab" href="#si">Shop Information</a>
@@ -292,7 +281,7 @@
 
             <!-- TAB CONTENT -->
             <div class="tab-content" id="myTabContent">
-              <!-- basic news info -->
+              <!-- basic video info -->
               <div class="tab-pane fade show active" id="bci">
                 <div class="card-body">
                   <div class="col-md-12 col-sm-12">
@@ -313,7 +302,7 @@
                                 <td class="whatsapp_number"></td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td class="">News Type</td>
+                                <td class="">Video Type</td>
                                 <td class="type"></td>
                             </tr>
                         </tbody>
@@ -423,16 +412,16 @@
 </div>
 
 <!-- Delete view -->
-<div class="modal fade" id="deleteNewsModal" tabindex="-1" role="dialog" aria-labelledby="deleteNewsModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteVideoModal" tabindex="-1" role="dialog" aria-labelledby="deleteVideoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteNewsModalLabel">Delete News</h5>
+        <h5 class="modal-title" id="deleteVideoModalLabel">Delete Video</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="deleteForm" method="POST" action="{{route('news.destroy', 1)}}">
+      <form id="deleteForm" method="POST" action="{{route('video.destroy', 1)}}">
         <!-- hidden input -->
         @method('DELETE')
         @csrf
@@ -483,40 +472,40 @@ $(document).ready(function(){
     });
 
     // global vars
-    var news = "";
+    var video = "";
 
-    // fetch news
-    function fetch_news(id){
+    // fetch video
+    function fetch_video(id){
         $.ajax({
-            url: '<?php echo(route("news.show", 0)); ?>',
+            url: '<?php echo(route("video.show", 0)); ?>',
             type: 'GET',
             data: {id: id},
             dataType: 'JSON',
             async: false,
             success: function (data) {
-                news = data.news;
+                video = data.video;
             }
         });
     }
 
     // create
-    $('#add_news').on('click', function(){
+    $('#add_video').on('click', function(){
         
     });
 
     // edit
     $('.editButton').on('click', function(){
         var id = $(this).data('id');
-        fetch_news(id);
+        fetch_video(id);
         $('#hidden').val(id);
 
         // image
         // un hide preview div
         $('#editForm .preview_wrapper').prop('hidden', false);
         // update preview image
-        if(news.image){
-          var src = `<?php echo(asset('img/news') . '/temp'); ?>`;
-          src = src.replace('temp', news.image);
+        if(video.image){
+          var src = `<?php echo(asset('img/videos') . '/temp'); ?>`;
+          src = src.replace('temp', video.image);
         }
         else{
           var src = `<?php echo(asset('img/noimg.jpg')); ?>`;
@@ -524,30 +513,27 @@ $(document).ready(function(){
         $('#editForm .preview_image').prop('src', src);
 
         // title
-        $('#editForm .title').val(news.title ? news.title : '');
+        $('#editForm .title').val(video.title ? video.title : '');
 
         // type
-        $('#editForm .type option[value="'+ news.type +'"]').prop('selected', true);
-
-        // description
-        $('#editForm .description').val(news.description ? news.description : '');
-
-        // date
-        $('#editForm .date').val(news.date ? news.date : '');
+        $('#editForm .type option[value="'+ video.type +'"]').prop('selected', true);
         
-        $('#editNewsModal').modal('show');
+        // link
+        $('#editForm .link').val(video.link ? video.link : '');
+
+        $('#editVideoModal').modal('show');
     });
 
     // detail
     $('.detailButton').on('click', function(){
       $('.bci').trigger('click');
       var id = $(this).data('id');
-      fetch_news(id);
-      // var news = $(this).data('object');
-      $('.name').html(news.name ? news.name : '');
-      $('.contact_number').html(news.contact_number ? news.contact_number : '');
-      $('.whatsapp_number').html(news.whatsapp_number);
-      if(news.shop_keeper_picture){
+      fetch_video(id);
+      // var video = $(this).data('object');
+      $('.name').html(video.name ? video.name : '');
+      $('.contact_number').html(video.contact_number ? video.contact_number : '');
+      $('.whatsapp_number').html(video.whatsapp_number);
+      if(video.shop_keeper_picture){
           var shop_path = $(this).data('shopkeeper');
           $('.shop_keeper_picture').attr('src', shop_path);
       }
@@ -555,13 +541,13 @@ $(document).ready(function(){
           var shop_path = '{{asset("img/logo.png")}}';
           $('.shop_keeper_picture').attr('src', shop_path);
       }
-      $('.type').html(news.type ? news.type : '');
-      $('.shop_name').html(news.shop_name ? news.shop_name : '');
-      $('.shop_number').html(news.shop_number ? news.shop_number : '');
-      $('.floor').html(news.floor ? news.floor : '');
-      $('.area').html((news.market && news.market.area) ? news.market.area.name : '');
-      $('.market').html(news.market ? news.market.name : '');
-      if(news.shop_picture){
+      $('.type').html(video.type ? video.type : '');
+      $('.shop_name').html(video.shop_name ? video.shop_name : '');
+      $('.shop_number').html(video.shop_number ? video.shop_number : '');
+      $('.floor').html(video.floor ? video.floor : '');
+      $('.area').html((video.market && video.market.area) ? video.market.area.name : '');
+      $('.market').html(video.market ? video.market.name : '');
+      if(video.shop_picture){
           var shop_path = $(this).data('shop');
           $('.shop_picture').attr('src', shop_path);
       }
@@ -571,28 +557,28 @@ $(document).ready(function(){
       }
       // image gallery work
       $('.gallery_wrapper').html('');
-      if(news.news_images.length > 0){
-          for(var i = 0; i < news.news_images.length; i++){
-          $('.gallery_wrapper').append(`<div class="col-md-4 mb-3"><a target="_blank" href="{{asset('img/news_images')}}/`+news.news_images[i].location+`" class="col-md-12"><img class="col-md-12 shop_keeper_picture" src="{{asset('img/news_images')}}/`+news.news_images[i].location+`"></a><button class="btn btn_del_news_image" value="`+news.news_images[i].id+`" type="button"><i class="fas fa-trash red ml-1"></i></button></div>`);
+      if(video.video_images.length > 0){
+          for(var i = 0; i < video.video_images.length; i++){
+          $('.gallery_wrapper').append(`<div class="col-md-4 mb-3"><a target="_blank" href="{{asset('img/video_images')}}/`+video.video_images[i].location+`" class="col-md-12"><img class="col-md-12 shop_keeper_picture" src="{{asset('img/video_images')}}/`+video.video_images[i].location+`"></a><button class="btn btn_del_video_image" value="`+video.video_images[i].id+`" type="button"><i class="fas fa-trash red ml-1"></i></button></div>`);
           }
       }
-      $('.status').html(news.status ? news.status : '');
-      $('.visiting_days').html(news.visiting_days ? news.visiting_days : '');
-      $('.cash_on_delivery').html(news.cash_on_delivery ? news.cash_on_delivery : '');
-      $('.opening_balance').html(news.opening_balance ? ("Rs. " + news.opening_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
-      $('.business_to_date').html(news.business_to_date ? ("Rs. " + news.business_to_date.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
-      $('.outstanding_balance').html(news.outstanding_balance ? ("Rs. " + news.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
-      // $('.special_discount').html(news.special_discount ? ("Rs. " + news.special_discount) : '');
-      $('#viewNewsModal').modal('show');
+      $('.status').html(video.status ? video.status : '');
+      $('.visiting_days').html(video.visiting_days ? video.visiting_days : '');
+      $('.cash_on_delivery').html(video.cash_on_delivery ? video.cash_on_delivery : '');
+      $('.opening_balance').html(video.opening_balance ? ("Rs. " + video.opening_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
+      $('.business_to_date').html(video.business_to_date ? ("Rs. " + video.business_to_date.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
+      $('.outstanding_balance').html(video.outstanding_balance ? ("Rs. " + video.outstanding_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) : '');
+      // $('.special_discount').html(video.special_discount ? ("Rs. " + video.special_discount) : '');
+      $('#viewVideoModal').modal('show');
     });
 
     // delete
     $('.deleteButton').on('click', function(){
       var id = $(this).data('id');
-      $('#deleteForm').attr('action', "{{route('news.destroy', 1)}}");
+      $('#deleteForm').attr('action', "{{route('video.destroy', 1)}}");
       $('#deleteForm .hidden').val(id);
-      $('#deleteNewsModalLabel').text('Delete News: ' + $('.name' + id).html() + "?");
-      $('#deleteNewsModal').modal('show');
+      $('#deleteVideoModalLabel').text('Delete Video: ' + $('.name' + id).html() + "?");
+      $('#deleteVideoModal').modal('show');
     });
 
     // on image click (preview)
